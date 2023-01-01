@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="dateFormat" class="java.text.SimpleDateFormat">
+		<constructor-arg value="yyyy-MM-dd" />
+	</bean>
+	<bean id="con" class="com.masai.app.entity.Contact">
+		<property name="mContactEmail" value="vaibhav@gmail.com" />
+		<property name="mContactFN" value="vaibhav" />
+		<property name="mContactId" value="1" />
+		<property name="mContactLN" value="Karthikeyan" />
+	</bean>
+	<bean id="cus" class="com.masai.app.entity.Customer" autowire="byType">
+		<property name="mCustomerId" value="1" />
+		<property name="mCustomerName" value="vaibhav" />
+	</bean>
+	<bean id="sen" class="com.masai.app.entity.SenderInfo" autowire="byType">
+		<property name="mSendDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2010-01-31" />
+			</bean>
+		</property>
+		<property name="mSenderDesc" value="112" />
+	</bean>
+	<bean id="ru" class="com.masai.app.entity.RateUpdate">
+	<property name="mRateUpdateId" value="1" />
+	<property name="mUpdateDetails">
+	<list>
+		<ref bean="rud1" />
+		<ref bean="rud2" />
+		<ref bean="rud3" />
+	</list>
+	</property>
+	</bean>
+	<bean id="rud1" class="com.masai.app.entity.RateUpdateDetails">
+	<constructor-arg index="0" ref="cus" />
+	<constructor-arg index="1" value="1" />
+	<constructor-arg index="2" ref="ri" />
+	</bean>
+	<bean id="rud2" class="com.masai.app.entity.RateUpdateDetails">
+	<constructor-arg index="0" ref="cus" />
+	<constructor-arg index="1" value="1" />
+	<constructor-arg index="2" ref="ri" />
+	</bean>
+	<bean id="rud3" class="com.masai.app.entity.RateUpdateDetails">
+	<constructor-arg index="0" ref="cus" />
+	<constructor-arg index="1" value="1" />
+	<constructor-arg index="2" ref="ri" />
+	</bean>
+	<bean id="ri" class="com.masai.app.entity.RateInfo">
+		<constructor-arg index="0" value="5" />
+		<constructor-arg index="1" value="500.00" />
+		<constructor-arg index="2">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2010-01-31" />
+			</bean>
+		</constructor-arg>
+		<constructor-arg index="3" value="1" />
+		<constructor-arg index="4">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2010-01-31" />
+			</bean>
+		</constructor-arg>
+	</bean>
+</beans>
